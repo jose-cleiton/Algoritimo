@@ -12,17 +12,6 @@ class Linkedilist:
     def __str__(self):
         return f"LinkedList(len={self._size}, value={self.head})"
 
-    def append(self, elem):
-        if self.head:
-            pointer = self.head
-            while pointer.next:
-                pointer = pointer.next
-            pointer.next = Node(elem)
-
-        else:
-            self.head = Node(elem)
-        self._size = self._size + 1
-
     def __len__(self):
         return self._size
 
@@ -35,9 +24,6 @@ class Linkedilist:
                 raise IndexError("<-list index out of range->")
 
         return pointer
-
-    def set(self, index, elem):
-        pass
 
     def __getitem__(self, index):
         pointer = self._getnode(index)
@@ -72,6 +58,9 @@ class Linkedilist:
         node.next = pointer.next
         pointer.next = node
 
+    def append(self, elem):
+        self.insert(self._size, elem)
+
     def insert(self, index, elem):
         node = Node(elem)
 
@@ -81,16 +70,68 @@ class Linkedilist:
             self.insert_in_the_index(index, node)
         self._size = self._size + 1
 
+    def remove_first(self):
+        value_to_be_removed = self.head.data
+        if value_to_be_removed:
+            self.head = self.head.next
+            self._size = self._size - 1
+            value_to_be_removed = None
+        return value_to_be_removed
+
+    def remove_last(self):
+        pointer = self.head
+        while pointer.next.next:
+            pointer = pointer.next
+        value_to_be_removed = pointer.next.data
+        pointer.next = None
+        self._size = self._size - 1
+        return value_to_be_removed
+
+    def remove(self, elem):
+        pointer = self.head
+        if pointer.data == elem:
+            self.remove_first()
+            return f"o {elem} foi removido com exito"
+        else:
+            while pointer.next:
+                if pointer.next.data == elem:
+                    pointer.next = pointer.next.next
+                    self._size = self._size - 1
+                    break
+                pointer = pointer.next
+            else:
+                raise ValueError("{} not in list->".format(elem))
+            return True
+
+    def remove_at(self, index):
+        if self.head == None:
+            raise IndexError("<-list index out of range->")
+        pointer = self.head
+        if index == 0:
+            self.remove_first()
+            return f"o indice{index},  foi removido com exito"
+        else:
+            for i in range(index - 1):
+                pointer = pointer.next
+            value_to_be_removed = pointer.next.data
+            pointer.next = pointer.next.next
+            self._size = self._size - 1
+            return value_to_be_removed
+
+    def pop(self, index=None):
+        if index == None:
+            return self.remove_last()
+        else:
+            return self.remove_at(index)
+
 
 if __name__ == "__main__":
     os.system("cls" if os.name == "nt" else "clear")
 
     lista = Linkedilist()
 
-    lista.append(1)
-    lista.append(2)
-    lista.index(2)
-    len(lista)
-    lista.insert(0, 3)
-    lista.index(3)
-    print(lista[0])
+    lista.append(7)
+    lista.append(80)
+    lista.append(56)
+    lista.append(32)
+    lista.append(17)

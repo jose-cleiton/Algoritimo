@@ -9,8 +9,17 @@ class Linkedilist:
         self.head = None
         self._size = 0
 
+    def __repr__(self):
+        r = "["
+        pointer = self.head
+        for i in range(self._size - 1):
+            r = r + str(pointer.data) + ", "
+            pointer = pointer.next
+        r = r + str(pointer.data) + "]"
+        return r
+
     def __str__(self):
-        return f"LinkedList(len={self._size}, value={self.head})"
+        return self.__repr__()
 
     def __len__(self):
         return self._size
@@ -101,7 +110,7 @@ class Linkedilist:
                 pointer = pointer.next
             else:
                 raise ValueError("{} not in list->".format(elem))
-            return True
+            return f"o {elem} foi removido com exito"
 
     def remove_at(self, index):
         if self.head == None:
@@ -135,3 +144,4 @@ if __name__ == "__main__":
     lista.append(56)
     lista.append(32)
     lista.append(17)
+    print(lista)

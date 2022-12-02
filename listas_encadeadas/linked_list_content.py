@@ -9,6 +9,9 @@ class Linkedilist:
         self.head = None
         self._size = 0
 
+    def __str__(self):
+        return f"LinkedList(len={self._size}, value={self.head})"
+
     def append(self, elem):
         if self.head:
             pointer = self.head
@@ -60,15 +63,22 @@ class Linkedilist:
             i = i + 1
         raise ValueError("{} not in list->".format(elem))
 
+    def insert_start(self, node):
+        node.next = self.head
+        self.head = node
+
+    def insert_in_the_index(self, index, node):
+        pointer = self._getnode(index - 1)
+        node.next = pointer.next
+        pointer.next = node
+
     def insert(self, index, elem):
+        node = Node(elem)
+
         if index == 0:
-            node = Node(elem)
-            node.next = self.head
-            self.head = node
+            self.insert_start(node)
         else:
-            pointer = self._getnode(index - 1)
-            node.next = pointer.next
-            pointer.next = node
+            self.insert_in_the_index(index, node)
         self._size = self._size + 1
 
 
@@ -79,8 +89,8 @@ if __name__ == "__main__":
 
     lista.append(1)
     lista.append(2)
-    print(lista.index(2))
-    print(len(lista))
+    lista.index(2)
+    len(lista)
     lista.insert(0, 3)
-    print(lista.index(3))
+    lista.index(3)
     print(lista[0])

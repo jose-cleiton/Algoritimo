@@ -1,7 +1,7 @@
 # sequencial = []
 import os
 
-from node import Node
+from src.node.node import Node
 
 # Inserir na pilha
 # Remover da Pilha
@@ -65,12 +65,12 @@ class Slack:
         return self._size
 
     def __repr__(self):
-        arr = ""
+        arr = "" + " \n"
         pointer = self.top
         for _ in range(self._size - 1):
             arr = arr + "| " + str(pointer.data) + " |\n"
             pointer = pointer.next
-        arr = arr + "| " + str(pointer.data) + " |\n"
+        arr = arr + "| " + str(pointer.data) + " |\n" + "\___/" + " \n"
         return arr
 
     def __str__(self):
@@ -78,6 +78,7 @@ class Slack:
 
 
 if __name__ == "__main__":
+    # https://www.youtube.com/watch?v=tiee9D54tE0&list=PL5TJqBvpXQv5Bb71AE5Cd_kB5rNsfU4Cp&index=11&ab_channel=Programa%C3%A7%C3%A3oDin%C3%A2mica
     os.system("cls" if os.name == "nt" else "clear")
     pilha = Slack()
     pilha.push(1)

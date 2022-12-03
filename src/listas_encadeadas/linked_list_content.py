@@ -1,7 +1,7 @@
 # sequencial = []
 import os
 
-from node import Node
+from src.node.node import Node
 
 
 class Linkedilist:

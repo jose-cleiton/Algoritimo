@@ -1,4 +1,5 @@
 import os
+
 from src.node.node import Node
 
 
@@ -56,8 +57,8 @@ if __name__ == "__main__":
     # https://www.youtube.com/watch?v=tiee9D54tE0&list=PL5TJqBvpXQv5Bb71AE5Cd_kB5rNsfU4Cp&index=12&ab_channel=Programa%C3%A7%C3%A3oDin%C3%A2mica
     os.system("cls" if os.name == "nt" else "clear")
     fila = Queue()
-    fila.push('Claúdio')
-    fila.push('Cleiton')
-    fila.push('Cleber')
-    fila.push('Caléo')
-    fila.push('Cléo')
+    fila.push("Claúdio")
+    fila.push("Cleiton")
+    fila.push("Cleber")
+    fila.push("Caléo")
+    fila.push("Cléo")
